@@ -19,3 +19,7 @@ nlu:
     - random@example.com
     - Please send it to anything@example.com
     - Email is something@example.com
+
+- intent: analyse_device
+  examples: |
+    - 分析一下ip的cpu的情况

@@ -3,15 +3,27 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+- first: {triggers: action_first}
 - greet
 - inform
-- subscribe
+- analyse_device
 slots:
   email:
     type: text
     influence_conversation: false
     mappings: []
+  device:
+    type: text
+    influence_conversation: false
+      mappings: [ ]
+
+entities:
+  - device
+
 responses:
+  utter_first:
+  - text: |
+        你好呀！我是第一个机器人！
   utter_greet:
   - text: |
       Hello! How can I help you?
@@ -28,6 +40,7 @@ actions:
 - '...'
 - utter_greet
 - utter_subscribed
+- utter_analyse_device
 forms:
   newsletter_form:
     required_slots:

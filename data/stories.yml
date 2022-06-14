@@ -6,3 +6,8 @@ stories:
    - intent: subscribe
    - action: newsletter_form
    - active_loop: newsletter_form
+
+ - story: 1_analyse_device
+   steps:
+     - intent: analyse_device
+     - action: utter_analyse_device
