@@ -30,7 +30,3 @@ import logging
 import re
 from typing import Text, Dict, Any
 
-from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
-from py2neo import Graph
-from markdownify import markdownify as md
