@@ -1,0 +1,20 @@
+import ./common.chatito
+
+# Ways to request a restaurant within a location (using probability operator)
+# NOTE: 60% of the examples should come from the first sentence, and 40% from the second
+
+%[findRestaurantsByCity]('training': '100', 'testing': '100')
+    *[60%] ~[hi?] ~[please?] ~[analyse?] @[device]] ~[thanks?]
+    *[40%] ~[analyse?] @[device]~[how]
+
+~[analyse]
+    分析
+    了解
+@[device]
+    cpu
+    memory
+    内存
+~[how]
+    情况怎样
+    运行的好不好
+    情况怎么样了呢
