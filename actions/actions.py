@@ -92,6 +92,7 @@ class ActionAnalyseDevice(Action):
         for d in level1:
             buttons.append(make_button(d, '/search_level2{{"analyse_level1":"{0}", "sure":"{1}"}}'.format(d, d)))
         dispatcher.utter_button_message("请点击选择想查询的具体内容", buttons)
+        return []
 
 def ActionSearchLevel1(Action):
     def name(self) -> Text:
@@ -106,6 +107,7 @@ def ActionSearchLevel1(Action):
         for b in level2[level1_name]:
             buttons.append(make_button(b, '/analyse_device_final{{"analyse_level2":"{0}", "sure":"{1}"}}'.format(b, b)))
         dispatcher.utter_button_message("请点击选择想查询的具体内容", buttons)
+        return []
 
 def ActionAnalyseDeviceFinal(Action):
     def name(self) -> Text:
@@ -118,7 +120,7 @@ def ActionAnalyseDeviceFinal(Action):
         device_name = tracker.get_slot("device_name")
         level1_name = tracker.get_slot("analyse_level1")
         level2_name = tracker.get_slot("analyse_level2")
-        dispatcher.utter_button_message("设备名称", device_name)
-        dispatcher.utter_button_message("想要查询的信息:", level1_name)
+        dispatcher.utter_button_message("查询设备名称{0}上的{1}{2}情况信息".format(device_name,level1_name,level2_name))
+        return []
 
 
