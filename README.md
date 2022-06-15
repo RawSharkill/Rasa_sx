@@ -1,4 +1,6 @@
 # Rasa_sx机器人开发手册
+* `rasa run actions --actions actions.actions --cors "*" -vv  `
+* `rasa shell -m models/20201108-200002.tar.gz -vv`
 ### 数据库数据结构
 ```
 - yeleng

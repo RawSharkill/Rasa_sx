@@ -33,7 +33,6 @@ from typing import Text, Dict, Any
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from py2neo import Graph
 from markdownify import markdownify as md
 
 
@@ -44,8 +43,7 @@ level1 = ["os_machine_value", "power_value","temperature_value"]
 level2 = {
     "os_machine_value":["CPU_IDLE","MEM_USED_PERCENT"],
     "power_value":["CPU_Total_Power_value" ,"MEM_Total_Power_value" ,"Total_Power_value"],
-    "temperature_value":["CPU0_Temp_value" ,"CPU0_VR_Temp_value","CPU1_Temp_value","CPU1_VR_Temp_value" ,"DIMMG1_Temp_value","DIMMG0_Temp_value" ,"Inlet_Temp_value" ,"Outlet_Temp_value" ,"PCH_Temp_value","PSU0_Temp_value" ,"PSU1_Temp_value"
-}
+    "temperature_value":["CPU0_Temp_value" ,"CPU0_VR_Temp_value","CPU1_Temp_value","CPU1_VR_Temp_value" ,"DIMMG1_Temp_value","DIMMG0_Temp_value" ,"Inlet_Temp_value" ,"Outlet_Temp_value" ,"PCH_Temp_value","PSU0_Temp_value" ,"PSU1_Temp_value"]}
 def retrieve_device_name(name):
     names = []
     name = '.*' + '.*'.join(list(name)) + '.*'

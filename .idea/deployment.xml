@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="root@172.27.34.41:22" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="root@172.27.34.41:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/root/SX/my_rasa/project" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
