@@ -38,8 +38,14 @@ from markdownify import markdownify as md
 
 
 logger = logging.getLogger(__name__)
-p = "data/lookup/Device.txt"
-device_names = [i.strip() for i in open(p, 'r', encoding='UTF-8').readlines()]
+device_path = "data/lookup/Device_name.txt"
+device_names = [i.strip() for i in open(device_path, 'r', encoding='UTF-8').readlines()]
+level1 = ["os_machine_value", "power_value","temperature_value"]
+level2 = {
+    "os_machine_value":["CPU_IDLE","MEM_USED_PERCENT"],
+    "power_value":["CPU_Total_Power_value" ,"MEM_Total_Power_value" ,"Total_Power_value"],
+    "temperature_value":["CPU0_Temp_value" ,"CPU0_VR_Temp_value","CPU1_Temp_value","CPU1_VR_Temp_value" ,"DIMMG1_Temp_value","DIMMG0_Temp_value" ,"Inlet_Temp_value" ,"Outlet_Temp_value" ,"PCH_Temp_value","PSU0_Temp_value" ,"PSU1_Temp_value"
+}
 def retrieve_device_name(name):
     names = []
     name = '.*' + '.*'.join(list(name)) + '.*'
@@ -68,6 +74,9 @@ class ActionFirst(Action):
                               什么是[液冷]"))
         return []
 
+def make_button(title,payload):
+    return {'title': title, 'payload': payload}
+
 # 分析设备的状态
 class ActionAnalyseDevice(Action):
     def name(self) -> Text:
@@ -77,9 +86,39 @@ class ActionAnalyseDevice(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]):
-        device = tracker.get_slot("device")
+        device = tracker.get_slot("device_name")
         possible_device = retrieve_device_name(device)
-        dispatcher.utter_message(possible_device)
-        dispatcher.utter_message(md("分析设备信息？别问问题了！"))
+        buttons = []
+        for d in level1:
+            buttons.append(make_button(d, '/search_level2{{"analyse_level1":"{0}", "sure":"{1}"}}'.format(d, d)))
+        dispatcher.utter_button_message("请点击选择想查询的具体内容", buttons)
+
+def ActionSearchLevel1(Action):
+    def name(self) -> Text:
+        return "utter_search_level2"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]):
+        level1_name = tracker.get_slot("analyse_level1")
+        buttons = []
+        for b in level2[level1_name]:
+            buttons.append(make_button(b, '/analyse_device_final{{"analyse_level2":"{0}", "sure":"{1}"}}'.format(b, b)))
+        dispatcher.utter_button_message("请点击选择想查询的具体内容", buttons)
+
+def ActionAnalyseDeviceFinal(Action):
+    def name(self) -> Text:
+        return "utter_analyse_device_final"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]):
+        device_name = tracker.get_slot("device_name")
+        level1_name = tracker.get_slot("analyse_level1")
+        level2_name = tracker.get_slot("analyse_level2")
+        dispatcher.utter_button_message("设备名称", device_name)
+        dispatcher.utter_button_message("想要查询的信息:", level1_name)
 
 

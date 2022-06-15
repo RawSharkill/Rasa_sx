@@ -7,12 +7,22 @@ intents:
 - greet
 - inform
 - analyse_device
+- search_level2
+- analyse_device_final
 slots:
   email:
     type: text
     influence_conversation: false
     mappings: []
-  device:
+  device_name:
+    type: text
+    influence_conversation: false
+      mappings: [ ]
+  analyse_level1:
+    type: text
+    influence_conversation: false
+      mappings: [ ]
+  analyse_level2:
     type: text
     influence_conversation: false
       mappings: [ ]

@@ -11,3 +11,7 @@ stories:
    steps:
      - intent: analyse_device
      - action: utter_analyse_device
+     - intent: search_level2
+     - action: utter_search_level2
+     - intent: analyse_device_final
+     - action: utter_analyse_device_final
